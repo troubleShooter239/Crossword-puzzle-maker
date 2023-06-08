@@ -1,6 +1,0 @@
-C:\Users\morgu\source\repos\CrosswordPuzzleMaker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.vcxproj.AssemblyReference.cache
-C:\Users\morgu\source\repos\CrosswordPuzzleMaker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.vcxproj.SuggestedBindingRedirects.cache
-C:\Users\morgu\source\repos\CrosswordPuzzleMaker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.MainMenuForm.resources
-C:\Users\morgu\source\repos\CrosswordPuzzleMaker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.vcxproj.GenerateResource.cache
-C:\Users\morgu\source\repos\CrosswordPuzzleMaker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.SettingsForm.resources
-C:\Users\morgu\source\repos\CrosswordPuzzleMaker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.AboutProgrammForm.resources
