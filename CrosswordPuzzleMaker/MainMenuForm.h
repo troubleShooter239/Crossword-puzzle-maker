@@ -6,20 +6,14 @@
 
 namespace CrosswordPuzzleMaker
 {
-
 	using namespace System;
 	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
-	using namespace System::Drawing::Printing;
-	using namespace System::IO;
 
 	public ref class MainMenuForm : public System::Windows::Forms::Form
 	{
 	private: String^ textLogin;
 	private: String^ puzzleType;
 	private: bool isHide = false;
-
 	private: System::Windows::Forms::ToolStripMenuItem^ howToUseItToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ newAbstractPuzzleToolStripMenuItem;
 	private: System::Windows::Forms::ToolStrip^ toolStripBottom;
@@ -50,8 +44,13 @@ namespace CrosswordPuzzleMaker
 	private: System::Windows::Forms::ListView^ listViewVertically;
 	private: System::Windows::Forms::ListView^ listViewHorizontally;
 	private: System::Windows::Forms::ListView^ listViewQuestions;
-	private: System::Windows::Forms::Button^ buttonGenerate;
 	private: System::Windows::Forms::Button^ buttonClearField;
+	private: System::Windows::Forms::GroupBox^ groupBoxTop;
+	private: System::Windows::Forms::GroupBox^ groupBoxLeft;
+	private: System::Windows::Forms::GroupBox^ groupBoxRight;
+	private: System::Windows::Forms::ToolStripButton^ toolTopGenerateCrossword;
+	private: System::Windows::Forms::DataGridView^ crosswordTemplate;
+	private: System::Windows::Forms::GroupBox^ groupBoxCentre;
 	private: System::Windows::Forms::ToolStripButton^ toolTopSave;
 	public:
 		MainMenuForm()
@@ -59,7 +58,6 @@ namespace CrosswordPuzzleMaker
 			InitializeComponent();
 			textLogin = gcnew String(Environment::UserName);
 		}
-
 	protected:
 		~MainMenuForm()
 		{
@@ -68,7 +66,6 @@ namespace CrosswordPuzzleMaker
 				delete components;
 			}
 		}
-
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ fileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ newTemplateToolStripMenuItem;
@@ -84,8 +81,6 @@ namespace CrosswordPuzzleMaker
 	private: System::Windows::Forms::Label^ labelColumns;
 	private: System::Windows::Forms::Label^ labelRows;
 	private: System::Windows::Forms::Button^ buttonChange;
-	private: System::Windows::Forms::DataGridView^ crosswordTemplate;
-	private: System::Windows::Forms::Panel^ toolsPanel;
 	private: System::Windows::Forms::ToolStripMenuItem^ newCrosswordToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ openCrosswordToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ printToolStripMenuItem;
@@ -95,12 +90,10 @@ namespace CrosswordPuzzleMaker
 
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainMenuForm::typeid));
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainMenuForm::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->newCrosswordToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -126,10 +119,7 @@ namespace CrosswordPuzzleMaker
 			this->labelColumns = (gcnew System::Windows::Forms::Label());
 			this->labelRows = (gcnew System::Windows::Forms::Label());
 			this->buttonChange = (gcnew System::Windows::Forms::Button());
-			this->crosswordTemplate = (gcnew System::Windows::Forms::DataGridView());
-			this->toolsPanel = (gcnew System::Windows::Forms::Panel());
 			this->buttonClearField = (gcnew System::Windows::Forms::Button());
-			this->buttonGenerate = (gcnew System::Windows::Forms::Button());
 			this->toolStripBottom = (gcnew System::Windows::Forms::ToolStrip());
 			this->fileName = (gcnew System::Windows::Forms::ToolStripLabel());
 			this->currentTime = (gcnew System::Windows::Forms::ToolStripLabel());
@@ -142,6 +132,7 @@ namespace CrosswordPuzzleMaker
 			this->toolStripSeparator6 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->toolTopSave = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripSeparator8 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolTopGenerateCrossword = (gcnew System::Windows::Forms::ToolStripButton());
 			this->textBoxWord = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxQuestion = (gcnew System::Windows::Forms::TextBox());
 			this->labelHorizontally = (gcnew System::Windows::Forms::Label());
@@ -154,11 +145,19 @@ namespace CrosswordPuzzleMaker
 			this->listViewVertically = (gcnew System::Windows::Forms::ListView());
 			this->listViewHorizontally = (gcnew System::Windows::Forms::ListView());
 			this->listViewQuestions = (gcnew System::Windows::Forms::ListView());
+			this->groupBoxTop = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBoxLeft = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBoxRight = (gcnew System::Windows::Forms::GroupBox());
+			this->crosswordTemplate = (gcnew System::Windows::Forms::DataGridView());
+			this->groupBoxCentre = (gcnew System::Windows::Forms::GroupBox());
 			this->menuStrip1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->crosswordTemplate))->BeginInit();
-			this->toolsPanel->SuspendLayout();
 			this->toolStripBottom->SuspendLayout();
 			this->toolStripTop->SuspendLayout();
+			this->groupBoxTop->SuspendLayout();
+			this->groupBoxLeft->SuspendLayout();
+			this->groupBoxRight->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->crosswordTemplate))->BeginInit();
+			this->groupBoxCentre->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -208,7 +207,7 @@ namespace CrosswordPuzzleMaker
 			// 
 			this->newTemplateToolStripMenuItem->Name = L"newTemplateToolStripMenuItem";
 			this->newTemplateToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>(((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Alt)
-																											| System::Windows::Forms::Keys::N));
+																										  | System::Windows::Forms::Keys::N));
 			this->newTemplateToolStripMenuItem->Size = System::Drawing::Size(254, 22);
 			this->newTemplateToolStripMenuItem->Text = L"New template";
 			this->newTemplateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainMenuForm::newTemplateToolStripMenuItem_Click);
@@ -229,7 +228,7 @@ namespace CrosswordPuzzleMaker
 			// 
 			this->openToolStripMenuItem->Name = L"openToolStripMenuItem";
 			this->openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>(((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Shift)
-																									| System::Windows::Forms::Keys::O));
+																								   | System::Windows::Forms::Keys::O));
 			this->openToolStripMenuItem->Size = System::Drawing::Size(254, 22);
 			this->openToolStripMenuItem->Text = L"Open template";
 			this->openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainMenuForm::openToolStripMenuItem_Click);
@@ -251,7 +250,7 @@ namespace CrosswordPuzzleMaker
 			// 
 			this->saveAsToolStripMenuItem->Name = L"saveAsToolStripMenuItem";
 			this->saveAsToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>(((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Shift)
-																									| System::Windows::Forms::Keys::S));
+																									 | System::Windows::Forms::Keys::S));
 			this->saveAsToolStripMenuItem->Size = System::Drawing::Size(254, 22);
 			this->saveAsToolStripMenuItem->Text = L"Save as...";
 			this->saveAsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainMenuForm::saveAsToolStripMenuItem_Click);
@@ -321,166 +320,83 @@ namespace CrosswordPuzzleMaker
 			// 
 			// textBoxColumns
 			// 
-			this->textBoxColumns->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->textBoxColumns->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-																		static_cast<System::Byte>(204)));
-			this->textBoxColumns->Location = System::Drawing::Point(99, 14);
+			this->textBoxColumns->Anchor = System::Windows::Forms::AnchorStyles::Left;
+			this->textBoxColumns->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+																	  static_cast<System::Byte>(204)));
+			this->textBoxColumns->Location = System::Drawing::Point(84, 14);
 			this->textBoxColumns->MaxLength = 2;
 			this->textBoxColumns->Name = L"textBoxColumns";
-			this->textBoxColumns->Size = System::Drawing::Size(48, 26);
+			this->textBoxColumns->Size = System::Drawing::Size(48, 24);
 			this->textBoxColumns->TabIndex = 3;
 			this->textBoxColumns->Text = L"16";
 			this->textBoxColumns->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainMenuForm::textBoxColumns_KeyPress);
 			// 
 			// textBoxRows
 			// 
-			this->textBoxRows->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->textBoxRows->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-																	static_cast<System::Byte>(204)));
-			this->textBoxRows->Location = System::Drawing::Point(224, 14);
+			this->textBoxRows->Anchor = System::Windows::Forms::AnchorStyles::Left;
+			this->textBoxRows->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+																   static_cast<System::Byte>(204)));
+			this->textBoxRows->Location = System::Drawing::Point(204, 14);
 			this->textBoxRows->MaxLength = 2;
 			this->textBoxRows->Name = L"textBoxRows";
-			this->textBoxRows->Size = System::Drawing::Size(48, 26);
+			this->textBoxRows->Size = System::Drawing::Size(48, 24);
 			this->textBoxRows->TabIndex = 4;
 			this->textBoxRows->Text = L"16";
 			this->textBoxRows->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainMenuForm::textBoxRows_KeyPress);
 			// 
 			// labelColumns
 			// 
-			this->labelColumns->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->labelColumns->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->labelColumns->AutoSize = true;
-			this->labelColumns->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->labelColumns->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 																	static_cast<System::Byte>(204)));
-			this->labelColumns->Location = System::Drawing::Point(3, 16);
+			this->labelColumns->Location = System::Drawing::Point(6, 20);
 			this->labelColumns->Name = L"labelColumns";
-			this->labelColumns->Size = System::Drawing::Size(90, 24);
+			this->labelColumns->Size = System::Drawing::Size(72, 18);
 			this->labelColumns->TabIndex = 5;
 			this->labelColumns->Text = L"Columns:";
 			// 
 			// labelRows
 			// 
-			this->labelRows->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->labelRows->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->labelRows->AutoSize = true;
-			this->labelRows->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-																static_cast<System::Byte>(204)));
-			this->labelRows->Location = System::Drawing::Point(156, 16);
+			this->labelRows->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+																 static_cast<System::Byte>(204)));
+			this->labelRows->Location = System::Drawing::Point(147, 20);
 			this->labelRows->Name = L"labelRows";
-			this->labelRows->Size = System::Drawing::Size(62, 24);
+			this->labelRows->Size = System::Drawing::Size(51, 18);
 			this->labelRows->TabIndex = 6;
 			this->labelRows->Text = L"Rows:";
 			// 
 			// buttonChange
 			// 
-			this->buttonChange->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->buttonChange->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->buttonChange->Anchor = System::Windows::Forms::AnchorStyles::Left;
+			this->buttonChange->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 																	static_cast<System::Byte>(204)));
-			this->buttonChange->Location = System::Drawing::Point(294, 7);
+			this->buttonChange->Location = System::Drawing::Point(310, 14);
 			this->buttonChange->Name = L"buttonChange";
-			this->buttonChange->Size = System::Drawing::Size(76, 40);
+			this->buttonChange->Size = System::Drawing::Size(75, 24);
 			this->buttonChange->TabIndex = 8;
 			this->buttonChange->Text = L"Change";
 			this->buttonChange->UseVisualStyleBackColor = true;
 			this->buttonChange->Click += gcnew System::EventHandler(this, &MainMenuForm::buttonChange_Click);
 			// 
-			// crosswordTemplate
-			// 
-			this->crosswordTemplate->AllowUserToAddRows = false;
-			this->crosswordTemplate->AllowUserToDeleteRows = false;
-			this->crosswordTemplate->AllowUserToResizeColumns = false;
-			this->crosswordTemplate->AllowUserToResizeRows = false;
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::Black;
-			this->crosswordTemplate->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-			this->crosswordTemplate->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->crosswordTemplate->BackgroundColor = System::Drawing::Color::Black;
-			this->crosswordTemplate->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::Raised;
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle2->BackColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
-																		System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->crosswordTemplate->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-			this->crosswordTemplate->ColumnHeadersVisible = false;
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle3->BackColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-																		static_cast<System::Byte>(204)));
-			dataGridViewCellStyle3->ForeColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle3->Padding = System::Windows::Forms::Padding(1);
-			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::LightGray;
-			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::ControlDarkDark;
-			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->crosswordTemplate->DefaultCellStyle = dataGridViewCellStyle3;
-			this->crosswordTemplate->Location = System::Drawing::Point(403, 200);
-			this->crosswordTemplate->MultiSelect = false;
-			this->crosswordTemplate->Name = L"crosswordTemplate";
-			dataGridViewCellStyle4->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle4->BackColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
-																		System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle4->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->crosswordTemplate->RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-			this->crosswordTemplate->RowHeadersVisible = false;
-			dataGridViewCellStyle5->BackColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle5->ForeColor = System::Drawing::Color::Black;
-			this->crosswordTemplate->RowsDefaultCellStyle = dataGridViewCellStyle5;
-			this->crosswordTemplate->RowTemplate->DefaultCellStyle->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			this->crosswordTemplate->RowTemplate->DefaultCellStyle->BackColor = System::Drawing::Color::Black;
-			this->crosswordTemplate->RowTemplate->DefaultCellStyle->ForeColor = System::Drawing::Color::Black;
-			this->crosswordTemplate->ScrollBars = System::Windows::Forms::ScrollBars::None;
-			this->crosswordTemplate->Size = System::Drawing::Size(500, 500);
-			this->crosswordTemplate->TabIndex = 9;
-			this->crosswordTemplate->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MainMenuForm::crosswordTemplate_CellDoubleClick);
-			this->crosswordTemplate->CellFormatting += gcnew System::Windows::Forms::DataGridViewCellFormattingEventHandler(this, &MainMenuForm::crosswordTemplate_CellFormatting);
-			this->crosswordTemplate->EditingControlShowing += gcnew System::Windows::Forms::DataGridViewEditingControlShowingEventHandler(this, &MainMenuForm::crosswordTemplate_EditingControlShowing);
-			this->crosswordTemplate->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainMenuForm::crosswordTemplate_KeyPress);
-			// 
-			// toolsPanel
-			// 
-			this->toolsPanel->Controls->Add(this->buttonClearField);
-			this->toolsPanel->Controls->Add(this->buttonGenerate);
-			this->toolsPanel->Controls->Add(this->buttonChange);
-			this->toolsPanel->Controls->Add(this->labelRows);
-			this->toolsPanel->Controls->Add(this->textBoxRows);
-			this->toolsPanel->Controls->Add(this->labelColumns);
-			this->toolsPanel->Controls->Add(this->textBoxColumns);
-			this->toolsPanel->Location = System::Drawing::Point(0, 67);
-			this->toolsPanel->Name = L"toolsPanel";
-			this->toolsPanel->Size = System::Drawing::Size(803, 50);
-			this->toolsPanel->TabIndex = 10;
-			// 
 			// buttonClearField
 			// 
-			this->buttonClearField->Location = System::Drawing::Point(403, 17);
+			this->buttonClearField->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonClearField->Location = System::Drawing::Point(615, 19);
 			this->buttonClearField->Name = L"buttonClearField";
-			this->buttonClearField->Size = System::Drawing::Size(83, 23);
+			this->buttonClearField->Size = System::Drawing::Size(70, 23);
 			this->buttonClearField->TabIndex = 10;
 			this->buttonClearField->Text = L"Clear field";
 			this->buttonClearField->UseVisualStyleBackColor = true;
 			this->buttonClearField->Click += gcnew System::EventHandler(this, &MainMenuForm::buttonClearField_Click);
 			// 
-			// buttonGenerate
-			// 
-			this->buttonGenerate->Location = System::Drawing::Point(675, 17);
-			this->buttonGenerate->Name = L"buttonGenerate";
-			this->buttonGenerate->Size = System::Drawing::Size(114, 23);
-			this->buttonGenerate->TabIndex = 9;
-			this->buttonGenerate->Text = L"Generate crossword";
-			this->buttonGenerate->UseVisualStyleBackColor = true;
-			this->buttonGenerate->Click += gcnew System::EventHandler(this, &MainMenuForm::buttonGenerate_Click);
-			// 
 			// toolStripBottom
 			// 
 			this->toolStripBottom->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->toolStripBottom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-																		static_cast<System::Byte>(204)));
+																	   static_cast<System::Byte>(204)));
 			this->toolStripBottom->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
 			{
 				this->fileName, this->currentTime
@@ -505,11 +421,11 @@ namespace CrosswordPuzzleMaker
 			// 
 			this->toolStripTop->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 																	static_cast<System::Byte>(204)));
-			this->toolStripTop->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(8)
+			this->toolStripTop->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9)
 			{
 				this->toolStripLabel1,
 					this->toolStripLabel2, this->toolTopNewCrossword, this->toolStripSeparator7, this->toolTopOpenTemplate, this->toolStripSeparator6,
-					this->toolTopSave, this->toolStripSeparator8
+					this->toolTopSave, this->toolStripSeparator8, this->toolTopGenerateCrossword
 			});
 			this->toolStripTop->Location = System::Drawing::Point(0, 24);
 			this->toolStripTop->Name = L"toolStripTop";
@@ -573,26 +489,43 @@ namespace CrosswordPuzzleMaker
 			this->toolStripSeparator8->Name = L"toolStripSeparator8";
 			this->toolStripSeparator8->Size = System::Drawing::Size(6, 25);
 			// 
+			// toolTopGenerateCrossword
+			// 
+			this->toolTopGenerateCrossword->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolTopGenerateCrossword->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolTopGenerateCrossword.Image")));
+			this->toolTopGenerateCrossword->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolTopGenerateCrossword->Name = L"toolTopGenerateCrossword";
+			this->toolTopGenerateCrossword->Size = System::Drawing::Size(23, 22);
+			this->toolTopGenerateCrossword->Text = L"toolStripButton1";
+			this->toolTopGenerateCrossword->ToolTipText = L"Generate crossword";
+			this->toolTopGenerateCrossword->Click += gcnew System::EventHandler(this, &MainMenuForm::toolTopGenerateCrossword_Click);
+			// 
 			// textBoxWord
 			// 
-			this->textBoxWord->Location = System::Drawing::Point(12, 680);
+			this->textBoxWord->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+																						   | System::Windows::Forms::AnchorStyles::Right));
+			this->textBoxWord->Location = System::Drawing::Point(9, 569);
 			this->textBoxWord->Name = L"textBoxWord";
-			this->textBoxWord->Size = System::Drawing::Size(150, 20);
+			this->textBoxWord->Size = System::Drawing::Size(280, 20);
 			this->textBoxWord->TabIndex = 16;
 			this->textBoxWord->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainMenuForm::textBoxWord_KeyPress);
 			// 
 			// textBoxQuestion
 			// 
-			this->textBoxQuestion->Location = System::Drawing::Point(1021, 624);
+			this->textBoxQuestion->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+																							   | System::Windows::Forms::AnchorStyles::Right));
+			this->textBoxQuestion->Location = System::Drawing::Point(14, 513);
 			this->textBoxQuestion->Multiline = true;
 			this->textBoxQuestion->Name = L"textBoxQuestion";
-			this->textBoxQuestion->Size = System::Drawing::Size(291, 76);
+			this->textBoxQuestion->Size = System::Drawing::Size(280, 76);
 			this->textBoxQuestion->TabIndex = 17;
 			// 
 			// labelHorizontally
 			// 
+			this->labelHorizontally->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																								 | System::Windows::Forms::AnchorStyles::Right));
 			this->labelHorizontally->AutoSize = true;
-			this->labelHorizontally->Location = System::Drawing::Point(17, 151);
+			this->labelHorizontally->Location = System::Drawing::Point(6, 16);
 			this->labelHorizontally->Name = L"labelHorizontally";
 			this->labelHorizontally->Size = System::Drawing::Size(64, 13);
 			this->labelHorizontally->TabIndex = 18;
@@ -600,8 +533,10 @@ namespace CrosswordPuzzleMaker
 			// 
 			// labelVertically
 			// 
+			this->labelVertically->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																							   | System::Windows::Forms::AnchorStyles::Right));
 			this->labelVertically->AutoSize = true;
-			this->labelVertically->Location = System::Drawing::Point(17, 267);
+			this->labelVertically->Location = System::Drawing::Point(6, 135);
 			this->labelVertically->Name = L"labelVertically";
 			this->labelVertically->Size = System::Drawing::Size(52, 13);
 			this->labelVertically->TabIndex = 19;
@@ -609,8 +544,10 @@ namespace CrosswordPuzzleMaker
 			// 
 			// labelNotUsed
 			// 
+			this->labelNotUsed->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																							| System::Windows::Forms::AnchorStyles::Right));
 			this->labelNotUsed->AutoSize = true;
-			this->labelNotUsed->Location = System::Drawing::Point(17, 407);
+			this->labelNotUsed->Location = System::Drawing::Point(7, 254);
 			this->labelNotUsed->Name = L"labelNotUsed";
 			this->labelNotUsed->Size = System::Drawing::Size(53, 13);
 			this->labelNotUsed->TabIndex = 21;
@@ -618,8 +555,10 @@ namespace CrosswordPuzzleMaker
 			// 
 			// labelQuestions
 			// 
+			this->labelQuestions->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																							  | System::Windows::Forms::AnchorStyles::Right));
 			this->labelQuestions->AutoSize = true;
-			this->labelQuestions->Location = System::Drawing::Point(1029, 151);
+			this->labelQuestions->Location = System::Drawing::Point(11, 16);
 			this->labelQuestions->Name = L"labelQuestions";
 			this->labelQuestions->Size = System::Drawing::Size(57, 13);
 			this->labelQuestions->TabIndex = 22;
@@ -627,9 +566,11 @@ namespace CrosswordPuzzleMaker
 			// 
 			// buttonAddWord
 			// 
-			this->buttonAddWord->Location = System::Drawing::Point(12, 706);
+			this->buttonAddWord->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+																							 | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonAddWord->Location = System::Drawing::Point(9, 594);
 			this->buttonAddWord->Name = L"buttonAddWord";
-			this->buttonAddWord->Size = System::Drawing::Size(150, 23);
+			this->buttonAddWord->Size = System::Drawing::Size(280, 25);
 			this->buttonAddWord->TabIndex = 23;
 			this->buttonAddWord->Text = L"Add word";
 			this->buttonAddWord->UseVisualStyleBackColor = true;
@@ -637,9 +578,11 @@ namespace CrosswordPuzzleMaker
 			// 
 			// buttonAddQuestion
 			// 
-			this->buttonAddQuestion->Location = System::Drawing::Point(1021, 706);
+			this->buttonAddQuestion->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+																								 | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonAddQuestion->Location = System::Drawing::Point(14, 595);
 			this->buttonAddQuestion->Name = L"buttonAddQuestion";
-			this->buttonAddQuestion->Size = System::Drawing::Size(291, 23);
+			this->buttonAddQuestion->Size = System::Drawing::Size(280, 25);
 			this->buttonAddQuestion->TabIndex = 24;
 			this->buttonAddQuestion->Text = L"Add question";
 			this->buttonAddQuestion->UseVisualStyleBackColor = true;
@@ -647,10 +590,14 @@ namespace CrosswordPuzzleMaker
 			// 
 			// listViewNotUsed
 			// 
+			this->listViewNotUsed->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																								| System::Windows::Forms::AnchorStyles::Left)
+																							   | System::Windows::Forms::AnchorStyles::Right));
 			this->listViewNotUsed->HideSelection = false;
-			this->listViewNotUsed->Location = System::Drawing::Point(12, 423);
+			this->listViewNotUsed->Location = System::Drawing::Point(9, 270);
+			this->listViewNotUsed->MultiSelect = false;
 			this->listViewNotUsed->Name = L"listViewNotUsed";
-			this->listViewNotUsed->Size = System::Drawing::Size(150, 251);
+			this->listViewNotUsed->Size = System::Drawing::Size(280, 280);
 			this->listViewNotUsed->TabIndex = 27;
 			this->listViewNotUsed->UseCompatibleStateImageBehavior = false;
 			this->listViewNotUsed->View = System::Windows::Forms::View::Tile;
@@ -658,33 +605,148 @@ namespace CrosswordPuzzleMaker
 			// 
 			// listViewVertically
 			// 
+			this->listViewVertically->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																								  | System::Windows::Forms::AnchorStyles::Right));
 			this->listViewVertically->HideSelection = false;
-			this->listViewVertically->Location = System::Drawing::Point(12, 283);
+			this->listViewVertically->Location = System::Drawing::Point(9, 151);
+			this->listViewVertically->MultiSelect = false;
 			this->listViewVertically->Name = L"listViewVertically";
-			this->listViewVertically->Size = System::Drawing::Size(150, 100);
+			this->listViewVertically->Size = System::Drawing::Size(280, 100);
 			this->listViewVertically->TabIndex = 28;
 			this->listViewVertically->UseCompatibleStateImageBehavior = false;
 			this->listViewVertically->View = System::Windows::Forms::View::Tile;
 			// 
 			// listViewHorizontally
 			// 
+			this->listViewHorizontally->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																									| System::Windows::Forms::AnchorStyles::Right));
 			this->listViewHorizontally->HideSelection = false;
-			this->listViewHorizontally->Location = System::Drawing::Point(12, 164);
+			this->listViewHorizontally->Location = System::Drawing::Point(9, 32);
+			this->listViewHorizontally->MultiSelect = false;
 			this->listViewHorizontally->Name = L"listViewHorizontally";
-			this->listViewHorizontally->Size = System::Drawing::Size(150, 100);
+			this->listViewHorizontally->Size = System::Drawing::Size(280, 100);
 			this->listViewHorizontally->TabIndex = 29;
 			this->listViewHorizontally->UseCompatibleStateImageBehavior = false;
 			this->listViewHorizontally->View = System::Windows::Forms::View::Tile;
 			// 
 			// listViewQuestions
 			// 
+			this->listViewQuestions->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																								  | System::Windows::Forms::AnchorStyles::Left)
+																								 | System::Windows::Forms::AnchorStyles::Right));
 			this->listViewQuestions->HideSelection = false;
-			this->listViewQuestions->Location = System::Drawing::Point(1021, 167);
+			this->listViewQuestions->Location = System::Drawing::Point(14, 32);
+			this->listViewQuestions->MultiSelect = false;
 			this->listViewQuestions->Name = L"listViewQuestions";
-			this->listViewQuestions->Size = System::Drawing::Size(291, 451);
+			this->listViewQuestions->Size = System::Drawing::Size(280, 470);
 			this->listViewQuestions->TabIndex = 30;
 			this->listViewQuestions->UseCompatibleStateImageBehavior = false;
 			this->listViewQuestions->View = System::Windows::Forms::View::Tile;
+			// 
+			// groupBoxTop
+			// 
+			this->groupBoxTop->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																						   | System::Windows::Forms::AnchorStyles::Right));
+			this->groupBoxTop->Controls->Add(this->labelColumns);
+			this->groupBoxTop->Controls->Add(this->textBoxColumns);
+			this->groupBoxTop->Controls->Add(this->textBoxRows);
+			this->groupBoxTop->Controls->Add(this->labelRows);
+			this->groupBoxTop->Controls->Add(this->buttonChange);
+			this->groupBoxTop->Location = System::Drawing::Point(0, 52);
+			this->groupBoxTop->Name = L"groupBoxTop";
+			this->groupBoxTop->Size = System::Drawing::Size(1324, 53);
+			this->groupBoxTop->TabIndex = 32;
+			this->groupBoxTop->TabStop = false;
+			// 
+			// groupBoxLeft
+			// 
+			this->groupBoxLeft->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																							| System::Windows::Forms::AnchorStyles::Left));
+			this->groupBoxLeft->Controls->Add(this->listViewHorizontally);
+			this->groupBoxLeft->Controls->Add(this->labelHorizontally);
+			this->groupBoxLeft->Controls->Add(this->textBoxWord);
+			this->groupBoxLeft->Controls->Add(this->listViewNotUsed);
+			this->groupBoxLeft->Controls->Add(this->labelNotUsed);
+			this->groupBoxLeft->Controls->Add(this->buttonAddWord);
+			this->groupBoxLeft->Controls->Add(this->labelVertically);
+			this->groupBoxLeft->Controls->Add(this->listViewVertically);
+			this->groupBoxLeft->Location = System::Drawing::Point(0, 111);
+			this->groupBoxLeft->Name = L"groupBoxLeft";
+			this->groupBoxLeft->Size = System::Drawing::Size(300, 632);
+			this->groupBoxLeft->TabIndex = 33;
+			this->groupBoxLeft->TabStop = false;
+			// 
+			// groupBoxRight
+			// 
+			this->groupBoxRight->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																							 | System::Windows::Forms::AnchorStyles::Right));
+			this->groupBoxRight->Controls->Add(this->listViewQuestions);
+			this->groupBoxRight->Controls->Add(this->buttonAddQuestion);
+			this->groupBoxRight->Controls->Add(this->labelQuestions);
+			this->groupBoxRight->Controls->Add(this->textBoxQuestion);
+			this->groupBoxRight->Location = System::Drawing::Point(1024, 111);
+			this->groupBoxRight->Name = L"groupBoxRight";
+			this->groupBoxRight->Size = System::Drawing::Size(300, 632);
+			this->groupBoxRight->TabIndex = 34;
+			this->groupBoxRight->TabStop = false;
+			// 
+			// crosswordTemplate
+			// 
+			this->crosswordTemplate->AllowUserToAddRows = false;
+			this->crosswordTemplate->AllowUserToDeleteRows = false;
+			this->crosswordTemplate->AllowUserToResizeColumns = false;
+			this->crosswordTemplate->AllowUserToResizeRows = false;
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::Black;
+			this->crosswordTemplate->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this->crosswordTemplate->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																								  | System::Windows::Forms::AnchorStyles::Left)
+																								 | System::Windows::Forms::AnchorStyles::Right));
+			this->crosswordTemplate->BackgroundColor = System::Drawing::SystemColors::Control;
+			this->crosswordTemplate->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->crosswordTemplate->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::Raised;
+			this->crosswordTemplate->ColumnHeadersVisible = false;
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+																		static_cast<System::Byte>(204)));
+			dataGridViewCellStyle2->ForeColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle2->Padding = System::Windows::Forms::Padding(1);
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::LightGray;
+			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::ControlDarkDark;
+			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->crosswordTemplate->DefaultCellStyle = dataGridViewCellStyle2;
+			this->crosswordTemplate->Location = System::Drawing::Point(115, 50);
+			this->crosswordTemplate->MultiSelect = false;
+			this->crosswordTemplate->Name = L"crosswordTemplate";
+			this->crosswordTemplate->RowHeadersVisible = false;
+			dataGridViewCellStyle3->BackColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
+			this->crosswordTemplate->RowsDefaultCellStyle = dataGridViewCellStyle3;
+			this->crosswordTemplate->RowTemplate->DefaultCellStyle->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			this->crosswordTemplate->RowTemplate->DefaultCellStyle->BackColor = System::Drawing::Color::Black;
+			this->crosswordTemplate->RowTemplate->DefaultCellStyle->ForeColor = System::Drawing::Color::Black;
+			this->crosswordTemplate->ScrollBars = System::Windows::Forms::ScrollBars::None;
+			this->crosswordTemplate->Size = System::Drawing::Size(500, 500);
+			this->crosswordTemplate->TabIndex = 9;
+			this->crosswordTemplate->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MainMenuForm::crosswordTemplate_CellDoubleClick);
+			this->crosswordTemplate->CellFormatting += gcnew System::Windows::Forms::DataGridViewCellFormattingEventHandler(this, &MainMenuForm::crosswordTemplate_CellFormatting);
+			this->crosswordTemplate->EditingControlShowing += gcnew System::Windows::Forms::DataGridViewEditingControlShowingEventHandler(this, &MainMenuForm::crosswordTemplate_EditingControlShowing);
+			this->crosswordTemplate->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainMenuForm::crosswordTemplate_KeyPress);
+			// 
+			// groupBoxCentre
+			// 
+			this->groupBoxCentre->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																							   | System::Windows::Forms::AnchorStyles::Left)
+																							  | System::Windows::Forms::AnchorStyles::Right));
+			this->groupBoxCentre->Controls->Add(this->buttonClearField);
+			this->groupBoxCentre->Controls->Add(this->crosswordTemplate);
+			this->groupBoxCentre->Location = System::Drawing::Point(310, 150);
+			this->groupBoxCentre->Name = L"groupBoxCentre";
+			this->groupBoxCentre->Size = System::Drawing::Size(700, 580);
+			this->groupBoxCentre->TabIndex = 35;
+			this->groupBoxCentre->TabStop = false;
 			// 
 			// MainMenuForm
 			// 
@@ -692,25 +754,15 @@ namespace CrosswordPuzzleMaker
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1324, 770);
-			this->Controls->Add(this->listViewQuestions);
-			this->Controls->Add(this->listViewHorizontally);
-			this->Controls->Add(this->listViewVertically);
-			this->Controls->Add(this->listViewNotUsed);
-			this->Controls->Add(this->buttonAddQuestion);
-			this->Controls->Add(this->buttonAddWord);
-			this->Controls->Add(this->labelQuestions);
-			this->Controls->Add(this->labelNotUsed);
-			this->Controls->Add(this->labelVertically);
-			this->Controls->Add(this->labelHorizontally);
-			this->Controls->Add(this->textBoxQuestion);
-			this->Controls->Add(this->textBoxWord);
+			this->Controls->Add(this->groupBoxCentre);
+			this->Controls->Add(this->groupBoxRight);
+			this->Controls->Add(this->groupBoxLeft);
+			this->Controls->Add(this->groupBoxTop);
 			this->Controls->Add(this->toolStripTop);
 			this->Controls->Add(this->toolStripBottom);
-			this->Controls->Add(this->toolsPanel);
-			this->Controls->Add(this->crosswordTemplate);
 			this->Controls->Add(this->menuStrip1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-														static_cast<System::Byte>(204)));
+													  static_cast<System::Byte>(204)));
 			this->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
@@ -723,16 +775,20 @@ namespace CrosswordPuzzleMaker
 			this->SizeChanged += gcnew System::EventHandler(this, &MainMenuForm::MainMenuForm_SizeChanged);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->crosswordTemplate))->EndInit();
-			this->toolsPanel->ResumeLayout(false);
-			this->toolsPanel->PerformLayout();
 			this->toolStripBottom->ResumeLayout(false);
 			this->toolStripBottom->PerformLayout();
 			this->toolStripTop->ResumeLayout(false);
 			this->toolStripTop->PerformLayout();
+			this->groupBoxTop->ResumeLayout(false);
+			this->groupBoxTop->PerformLayout();
+			this->groupBoxLeft->ResumeLayout(false);
+			this->groupBoxLeft->PerformLayout();
+			this->groupBoxRight->ResumeLayout(false);
+			this->groupBoxRight->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->crosswordTemplate))->EndInit();
+			this->groupBoxCentre->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 
 #pragma endregion
@@ -781,67 +837,29 @@ namespace CrosswordPuzzleMaker
 	private: System::Void buttonAddWord_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void textBoxWord_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 	private: System::Void buttonAddQuestion_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void buttonGenerate_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void buttonClearField_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void listViewNotUsed_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
 	private: System::Void toolTopSave_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void saveAsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
-
 	private: System::Void clearField();
-
+	private: System::Void generateCrossword();
 	// Void method setting default values for field size
-	private: System::Void defaultTemplateSize(){
-		textBoxRows->Text = "16";
-		textBoxColumns->Text = "16";
-	}
+	private: System::Void defaultTemplateSize();
 	// Void method that creates field
-	private: System::Void creatingCrossword(int rows, int cols){
-		crosswordTemplate->RowCount = rows;
-		crosswordTemplate->ColumnCount = cols;
-
-		crosswordTemplateCellsSize(); // Setting cells size
-	}
+	private: System::Void creatingCrossword(int rows, int cols);
 	// Void method that automatically sets the cell sizes
-	private: System::Void crosswordTemplateCellsSize(){
-		for each (DataGridViewColumn ^ c in crosswordTemplate->Columns){
-			c->Width = crosswordTemplate->Width / crosswordTemplate->Columns->Count;
-		}
-
-		for each (DataGridViewRow ^ r in crosswordTemplate->Rows){
-			r->Height = crosswordTemplate->Height / crosswordTemplate->Rows->Count;
-		}
-	}
-	private: System::Void createNewField(){
-		fileName->Text = "File name: " + textLogin + puzzleType;
-
-		defaultTemplateSize();
-		creatingCrossword(crosswordTemplate->RowCount, crosswordTemplate->ColumnCount);
-	}
-	private: System::Void hideComponentsForCrossword(){
-		labelHorizontally->Visible = false;
-		labelVertically->Visible = false;
-		listViewHorizontally->Visible = false;
-		listViewVertically->Visible = false;
-		labelNotUsed->Visible = false;
-		listViewNotUsed->Visible = false;
-		textBoxWord->Visible = false;
-		buttonAddWord->Visible = false;
-		labelQuestions->Visible = false;
-		listViewQuestions->Visible = false;
-		textBoxQuestion->Visible = false;
-		buttonAddQuestion->Visible = false;
-
-		isHide = true;
-	}
-	private: System::Void saveField(){
-		StreamWriter^ sw = gcnew StreamWriter(textLogin + puzzleType + ".pzl");
+	private: System::Void crosswordTemplateCellsSize();
+	private: System::Void createNewField();
+	private: System::Void saveField()
+	{
+		System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter(textLogin + puzzleType + ".pzl");
 		sw->WriteLine(crosswordTemplate->Rows->Count);
 		sw->WriteLine(crosswordTemplate->Columns->Count);
 
 		for (int i = 0; i < crosswordTemplate->RowCount; i++){
 			for (int j = 0; j < crosswordTemplate->ColumnCount; j++){
-				if (crosswordTemplate->Rows[i]->Cells[j]->Style->BackColor == Color::White){
+				if (crosswordTemplate->Rows[i]->Cells[j]->Style->BackColor == System::Drawing::Color::White) {
 					sw->Write("W");
 				}
 				else{
@@ -852,12 +870,12 @@ namespace CrosswordPuzzleMaker
 		}
 		sw->Close();
 	}
-	private: System::Void openTemplate(){
+	private: System::Void openTemplate()
+	{
 		OpenFileDialog^ ofd = gcnew OpenFileDialog();
 		ofd->Filter = "Puzzle Files|*.pzl";
-
 		if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK){
-			StreamReader^ reader = gcnew StreamReader(ofd->FileName);
+			System::IO::StreamReader^ reader = gcnew System::IO::StreamReader(ofd->FileName);
 			textBoxRows->Text = reader->ReadLine();
 			textBoxColumns->Text = reader->ReadLine();
 
@@ -869,10 +887,10 @@ namespace CrosswordPuzzleMaker
 			while ((line = reader->ReadLine()) != nullptr){
 				for (int i = 0; i < line->Length; i++){
 					if (line[i] == 'B'){
-						crosswordTemplate->Rows[rowIndex]->Cells[i]->Style->BackColor = Color::Black;
+						crosswordTemplate->Rows[rowIndex]->Cells[i]->Style->BackColor = System::Drawing::Color::Black;
 					}
 					else{
-						crosswordTemplate->Rows[rowIndex]->Cells[i]->Style->BackColor = Color::White;
+						crosswordTemplate->Rows[rowIndex]->Cells[i]->Style->BackColor = System::Drawing::Color::White;
 					}
 				}
 				rowIndex++;
@@ -880,14 +898,7 @@ namespace CrosswordPuzzleMaker
 			reader->Close();
 		}
 	}
-	private: System::Boolean isExistsInRichTextBox(String ^ searchText, ListView ^ list)
-	{
-		for (int i = 0; i < list->Items->Count; i++){
-			if (list->Items[i]->Text->Equals(searchText)){
-				return true;
-			}
-		}
-		return false;
-	}
-};
+	private: System::Boolean isExistsInRichTextBox(String^ searchText, ListView^ list);
+    private: System::Void toolTopGenerateCrossword_Click(System::Object^ sender, System::EventArgs^ e);
+    };
 } 

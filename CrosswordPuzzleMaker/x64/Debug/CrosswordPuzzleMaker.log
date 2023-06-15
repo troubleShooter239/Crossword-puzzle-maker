@@ -1,3 +1,5 @@
-﻿  MainMenuForm.cpp
+﻿  CrosswordAlgorithm.cpp
+  MainMenuForm.cpp
+  Generating Code...
   AboutProgrammForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   CrosswordPuzzleMaker.vcxproj -> C:\Users\morgu\source\repos\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.exe

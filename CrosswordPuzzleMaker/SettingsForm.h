@@ -2,13 +2,12 @@
 
 namespace CrosswordPuzzleMaker {
 
-	using namespace System;
-	using namespace System::Windows::Forms;
-
 	public ref class SettingsForm : public System::Windows::Forms::Form
 	{
-	private: System::Diagnostics::PerformanceCounter^ cpuCounter = gcnew System::Diagnostics::PerformanceCounter("Processor", "% Processor Time", "_Total");
-	private: System::Diagnostics::PerformanceCounter^ memCounter = gcnew System::Diagnostics::PerformanceCounter("Memory", "Available MBytes");
+	private: System::Diagnostics::PerformanceCounter^ cpuCounter 
+		= gcnew System::Diagnostics::PerformanceCounter("Processor", "% Processor Time", "_Total");
+	private: System::Diagnostics::PerformanceCounter^ memCounter 
+		= gcnew System::Diagnostics::PerformanceCounter("Memory", "Available MBytes");
 	private: System::Windows::Forms::Panel^ panelButtons;
 	private: System::Windows::Forms::Panel^ panelLabel;
 	public:
@@ -19,7 +18,6 @@ namespace CrosswordPuzzleMaker {
 			this->BackColor = form->BackColor;
 			this->ForeColor = form->ForeColor;
 		}
-
 	protected:
 		~SettingsForm()
 		{
@@ -107,7 +105,10 @@ namespace CrosswordPuzzleMaker {
 			this->ClientSize = System::Drawing::Size(434, 261);
 			this->Controls->Add(this->panelLabel);
 			this->Controls->Add(this->panelButtons);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"SettingsForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Settings";
@@ -117,6 +118,7 @@ namespace CrosswordPuzzleMaker {
 			this->panelLabel->PerformLayout();
 			this->ResumeLayout(false);
 		}
+
 #pragma endregion
 
 	private: System::Void buttonBackColor_Click(System::Object^ sender, System::EventArgs^ e);

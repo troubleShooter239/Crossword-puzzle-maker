@@ -2,9 +2,6 @@
 
 namespace CrosswordPuzzleMaker {
 
-	using namespace System;
-	using namespace System::Windows::Forms;
-
 	public ref class AboutProgrammForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -12,7 +9,6 @@ namespace CrosswordPuzzleMaker {
 		{
 			InitializeComponent();
 		}
-
 	protected:
 		~AboutProgrammForm()
 		{
@@ -23,7 +19,6 @@ namespace CrosswordPuzzleMaker {
 		}
 	private: System::Windows::Forms::LinkLabel^ githubUrl;
 	private: System::Windows::Forms::Label^ someText;
-	private: System::Windows::Forms::Button^ exitButton;
 	private: System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
@@ -33,7 +28,6 @@ namespace CrosswordPuzzleMaker {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AboutProgrammForm::typeid));
 			this->githubUrl = (gcnew System::Windows::Forms::LinkLabel());
 			this->someText = (gcnew System::Windows::Forms::Label());
-			this->exitButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// githubUrl
@@ -65,19 +59,6 @@ namespace CrosswordPuzzleMaker {
 			this->someText->TabIndex = 1;
 			this->someText->Text = L"Developer:";
 			// 
-			// exitButton
-			// 
-			this->exitButton->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->exitButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-																  static_cast<System::Byte>(204)));
-			this->exitButton->Location = System::Drawing::Point(535, -2);
-			this->exitButton->Name = L"exitButton";
-			this->exitButton->Size = System::Drawing::Size(39, 23);
-			this->exitButton->TabIndex = 2;
-			this->exitButton->Text = L"X";
-			this->exitButton->UseVisualStyleBackColor = false;
-			this->exitButton->Click += gcnew System::EventHandler(this, &AboutProgrammForm::exitButton_Click);
-			// 
 			// AboutProgrammForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -86,21 +67,21 @@ namespace CrosswordPuzzleMaker {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(572, 479);
-			this->Controls->Add(this->exitButton);
 			this->Controls->Add(this->someText);
 			this->Controls->Add(this->githubUrl);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"AboutProgrammForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"About Programm";
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
+
 #pragma endregion
 
 	private: System::Void githubUrl_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e);
-	private: System::Void exitButton_Click(System::Object^ sender, System::EventArgs^ e);
 	};
 }
