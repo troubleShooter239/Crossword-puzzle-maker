@@ -615,6 +615,7 @@ namespace CrosswordPuzzleMaker
 			this->listViewVertically->TabIndex = 28;
 			this->listViewVertically->UseCompatibleStateImageBehavior = false;
 			this->listViewVertically->View = System::Windows::Forms::View::Tile;
+			this->listViewVertically->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainMenuForm::listViewVertically_KeyDown);
 			// 
 			// listViewHorizontally
 			// 
@@ -628,6 +629,7 @@ namespace CrosswordPuzzleMaker
 			this->listViewHorizontally->TabIndex = 29;
 			this->listViewHorizontally->UseCompatibleStateImageBehavior = false;
 			this->listViewHorizontally->View = System::Windows::Forms::View::Tile;
+			this->listViewHorizontally->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainMenuForm::listViewHorizontally_KeyDown);
 			// 
 			// listViewQuestions
 			// 
@@ -642,6 +644,7 @@ namespace CrosswordPuzzleMaker
 			this->listViewQuestions->TabIndex = 30;
 			this->listViewQuestions->UseCompatibleStateImageBehavior = false;
 			this->listViewQuestions->View = System::Windows::Forms::View::Tile;
+			this->listViewQuestions->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainMenuForm::listViewQuestions_KeyDown);
 			// 
 			// groupBoxTop
 			// 
@@ -789,6 +792,7 @@ namespace CrosswordPuzzleMaker
 			this->groupBoxCentre->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 
 #pragma endregion
@@ -851,25 +855,9 @@ namespace CrosswordPuzzleMaker
 	// Void method that automatically sets the cell sizes
 	private: System::Void crosswordTemplateCellsSize();
 	private: System::Void createNewField();
-	private: System::Void saveField()
-	{
-		System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter(textLogin + puzzleType + ".pzl");
-		sw->WriteLine(crosswordTemplate->Rows->Count);
-		sw->WriteLine(crosswordTemplate->Columns->Count);
-
-		for (int i = 0; i < crosswordTemplate->RowCount; i++){
-			for (int j = 0; j < crosswordTemplate->ColumnCount; j++){
-				if (crosswordTemplate->Rows[i]->Cells[j]->Style->BackColor == System::Drawing::Color::White) {
-					sw->Write("W");
-				}
-				else{
-					sw->Write("B");
-				}
-			}
-			sw->WriteLine();
-		}
-		sw->Close();
-	}
+	private: System::Void saveField();
+	private: System::Void saveField(System::String^ path);
+	private: System::Void saveCrossword(System::String^ path);
 	private: System::Void openTemplate()
 	{
 		OpenFileDialog^ ofd = gcnew OpenFileDialog();
@@ -900,5 +888,9 @@ namespace CrosswordPuzzleMaker
 	}
 	private: System::Boolean isExistsInRichTextBox(String^ searchText, ListView^ list);
     private: System::Void toolTopGenerateCrossword_Click(System::Object^ sender, System::EventArgs^ e);
-    };
+	private: System::Void deleteListViewItem(System::Windows::Forms::KeyEventArgs^ e);
+	private: System::Void listViewVertically_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
+    private: System::Void listViewHorizontally_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
+    private: System::Void listViewQuestions_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
+};
 } 
