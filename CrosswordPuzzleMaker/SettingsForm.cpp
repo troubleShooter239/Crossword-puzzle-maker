@@ -3,10 +3,12 @@
 System::Void CrosswordPuzzleMaker::SettingsForm::buttonBackColor_Click(
 	System::Object^ sender, System::EventArgs^ e)
 {
-	System::Windows::Forms::ColorDialog^ cd = gcnew System::Windows::Forms::ColorDialog();
+	System::Windows::Forms::ColorDialog^ cd 
+		= gcnew System::Windows::Forms::ColorDialog();
 	if (cd->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 	{
-		for each (System::Windows::Forms::Form ^ form in System::Windows::Forms::Application::OpenForms)
+		for each (System::Windows::Forms::Form ^ form 
+				  in System::Windows::Forms::Application::OpenForms)
 		{
 			form->BackColor = cd->Color;
 		}
@@ -16,10 +18,12 @@ System::Void CrosswordPuzzleMaker::SettingsForm::buttonBackColor_Click(
 System::Void CrosswordPuzzleMaker::SettingsForm::buttonTextColor_Click(
 	System::Object^ sender, System::EventArgs^ e)
 {
-	System::Windows::Forms::ColorDialog^ cd = gcnew System::Windows::Forms::ColorDialog();
+	System::Windows::Forms::ColorDialog^ cd 
+		= gcnew System::Windows::Forms::ColorDialog();
 	if (cd->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 	{
-		for each (System::Windows::Forms::Form ^ form in System::Windows::Forms::Application::OpenForms)
+		for each (System::Windows::Forms::Form ^ form 
+				  in System::Windows::Forms::Application::OpenForms)
 		{
 			form->ForeColor = cd->Color;
 		}

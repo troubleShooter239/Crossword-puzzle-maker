@@ -6,13 +6,11 @@
 
 namespace CrosswordPuzzleMaker
 {
-	using namespace System;
-	using namespace System::Windows::Forms;
 
 	public ref class MainMenuForm : public System::Windows::Forms::Form
 	{
-	private: String^ textLogin;
-	private: String^ puzzleType;
+	private: System::String ^ textLogin;
+	private: System::String^ puzzleType;
 	private: bool isHide = false;
 	private: System::Windows::Forms::ToolStripMenuItem^ howToUseItToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ newAbstractPuzzleToolStripMenuItem;
@@ -56,7 +54,8 @@ namespace CrosswordPuzzleMaker
 		MainMenuForm()
 		{
 			InitializeComponent();
-			textLogin = gcnew String(Environment::UserName);
+			textLogin = gcnew System::String(
+				System::Environment::UserName);
 		}
 	protected:
 		~MainMenuForm()
@@ -854,7 +853,7 @@ namespace CrosswordPuzzleMaker
 	private: System::Void saveCrossword(System::String^ path);
 	private: System::Void openTemplate();
 	private: System::Void openCrossword();
-	private: System::Boolean isExistsInRichTextBox(String^ searchText, ListView^ list);
+	private: System::Boolean isExistsInRichTextBox(System::String^ searchText, System::Windows::Forms::ListView^ list);
     private: System::Void toolTopGenerateCrossword_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void deleteListViewItem(System::Windows::Forms::KeyEventArgs^ e);
 	private: System::Void listViewVertically_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);

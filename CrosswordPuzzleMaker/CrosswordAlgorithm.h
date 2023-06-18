@@ -7,12 +7,13 @@ public:
     {
         Horizontal, 
         Vertical
-    }; // Перечисление для определения направления слова
+    };
     CrosswordAlgorithm(int size);
-    void GetStartPosition(System::String^ word, int% startX, int% startY, int% direction);
+    void GetStartPosition(
+        System::String^ word, int% startX, int% startY, int% direction);
 
 private:
-    int crosswordSize; // Размер кроссворда
+    int crosswordSize;
 
     ref class WordPlacement
     {

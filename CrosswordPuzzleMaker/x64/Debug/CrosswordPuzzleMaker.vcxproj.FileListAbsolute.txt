@@ -10,3 +10,9 @@ C:\Users\HP\Downloads\Crossword-puzzle-maker-main (1)\Crossword-puzzle-maker-mai
 C:\Users\HP\Downloads\Crossword-puzzle-maker-main (1)\Crossword-puzzle-maker-main\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.MainMenuForm.resources
 C:\Users\HP\Downloads\Crossword-puzzle-maker-main (1)\Crossword-puzzle-maker-main\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.SettingsForm.resources
 C:\Users\HP\Downloads\Crossword-puzzle-maker-main (1)\Crossword-puzzle-maker-main\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.vcxproj.GenerateResource.cache
+C:\Users\morgu\Documents\GitHub\Crossword-puzzle-maker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.vcxproj.AssemblyReference.cache
+C:\Users\morgu\Documents\GitHub\Crossword-puzzle-maker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\morgu\Documents\GitHub\Crossword-puzzle-maker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.AboutProgrammForm.resources
+C:\Users\morgu\Documents\GitHub\Crossword-puzzle-maker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.MainMenuForm.resources
+C:\Users\morgu\Documents\GitHub\Crossword-puzzle-maker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.SettingsForm.resources
+C:\Users\morgu\Documents\GitHub\Crossword-puzzle-maker\CrosswordPuzzleMaker\x64\Debug\CrosswordPuzzleMaker.vcxproj.GenerateResource.cache
