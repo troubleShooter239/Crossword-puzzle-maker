@@ -112,6 +112,7 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::buttonChange_Click(System::Obje
 System::Void CrosswordPuzzleMaker::MainMenuForm::toolTopNewCrossword_Click(System::Object^ sender, 
 																		   System::EventArgs^ e)
 {
+	clearField();
 	puzzleType = "_Crossword";
 	createNewField();
 }
@@ -119,13 +120,16 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::toolTopNewCrossword_Click(Syste
 System::Void CrosswordPuzzleMaker::MainMenuForm::newAbstractPuzzleToolStripMenuItem_Click(
 	System::Object^ sender, System::EventArgs^ e)
 {
+	clearField();
 	puzzleType = "_Abstract";
 	createNewField();
+	toolTopGenerateCrossword->Enabled = false;
 }
 
 System::Void CrosswordPuzzleMaker::MainMenuForm::newCrosswordToolStripMenuItem_Click(
 	System::Object^ sender, System::EventArgs^ e)
 {
+	clearField();
 	puzzleType = "_Crossword";
 	createNewField();
 }
@@ -133,6 +137,7 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::newCrosswordToolStripMenuItem_C
 System::Void CrosswordPuzzleMaker::MainMenuForm::newTemplateToolStripMenuItem_Click(
 	System::Object^ sender, System::EventArgs^ e)
 {
+	clearField();
 	puzzleType = "_Template";
 	createNewField();
 }
@@ -301,11 +306,11 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::toolTopSave_Click(System::Objec
 {
 	if (puzzleType == "_Abstract")
 	{ //////////////////////////////////////////////////////// NEED TO SAVE THE DATA TO!!!
-		saveField();
+		saveCrossword();
 	}
 	else if (puzzleType == "_Crossword")
 	{
-		saveField();
+		saveCrossword();
 	}
 	else
 	{
@@ -318,11 +323,11 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::saveToolStripMenuItem_Click(Sys
 {
 	if (puzzleType == "_Abstract")
 	{ //////////////////////////////////////////////////////// NEED TO SAVE THE DATA TO!!!
-		saveField();
+		saveCrossword();
 	}
 	else if (puzzleType == "_Crossword")
 	{
-		saveField();
+		saveCrossword();
 	}
 	else
 	{
@@ -341,8 +346,8 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::saveAsToolStripMenuItem_Click(S
 	if (sfd->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 	{
 		if (puzzleType == "_Abstract")
-		{//////////////////////////////////////////////////////// NEED TO SAVE THE DATA TO!!!
-			saveField(sfd->FileName);
+		{
+			saveCrossword(sfd->FileName);
 		}
 		else if (puzzleType == "_Crossword")
 		{
@@ -364,53 +369,44 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::clearField()
 
 System::Void CrosswordPuzzleMaker::MainMenuForm::generateCrossword()
 {
-	if (listViewNotUsed->Items->Count > 2)
+	if (listViewNotUsed->Items->Count < 2)
 	{
-		int crosswordSize = crosswordTemplate->RowCount;
-		CrosswordAlgorithm^ algorithm = gcnew CrosswordAlgorithm(crosswordSize);
+		MessageBox::Show("There are not enough words in the dictionary.", "Alert!",
+			MessageBoxButtons::OK, MessageBoxIcon::Information);
+		return;
+	}
+	int crosswordSize = crosswordTemplate->RowCount;
+	CrosswordAlgorithm^ algorithm = gcnew CrosswordAlgorithm(crosswordSize);
 
-		for each (ListViewItem ^ item in listViewNotUsed->Items)
+	for each (ListViewItem ^ item in listViewNotUsed->Items)
+	{
+		item->Remove();
+		String^ word = item->Text;
+		int startX, startY, direction;
+		algorithm->GetStartPosition(word, startX, startY, direction);
+
+		if (direction == static_cast<int>(CrosswordAlgorithm::Direction::Horizontal))
 		{
-			item->Remove();
-			String^ word = item->Text;
-			// Получаем позицию (начальные координаты) для слова
-			int startX, startY, direction;
-			algorithm->GetStartPosition(word, startX, startY, direction);
-
+			listViewHorizontally->Items->Add(item);
+		}
+		else
+		{
+			listViewVertically->Items->Add(item);
+		}
+		for (int i = 0; i < word->Length; i++)
+		{
+			DataGridViewCell^ cell = crosswordTemplate->Rows[startY]->Cells[startX];
+			cell->Value = word[i];
+			cell->Style->BackColor = System::Drawing::Color::White;
 			if (direction == static_cast<int>(CrosswordAlgorithm::Direction::Horizontal))
 			{
-				listViewHorizontally->Items->Add(item);
+				startX++;
 			}
 			else
 			{
-				listViewVertically->Items->Add(item);
-			}
-			// Помещаем каждый символ слова в соответствующую ячейку DataGridView
-			for (int i = 0; i < word->Length; i++)
-			{
-				// Получаем ячейку DataGridView по координатам
-				DataGridViewCell^ cell = crosswordTemplate->Rows[startY]->Cells[startX];
-
-				// Устанавливаем значение ячейки равным символу
-				cell->Value = word[i];
-				cell->Style->BackColor = System::Drawing::Color::White;
-
-				if (direction == static_cast<int>(CrosswordAlgorithm::Direction::Horizontal))
-				{
-					startX++;
-				}
-				else
-				{
-					startY++;
-				}
-
+				startY++;
 			}
 		}
-	}
-	else
-	{
-		MessageBox::Show("There are not enough words in the dictionary.", "Alert!", 
-						 MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 }
 
@@ -536,6 +532,76 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::saveCrossword(System::String^ p
 	sw->Close();
 }
 
+System::Void CrosswordPuzzleMaker::MainMenuForm::openTemplate()
+{
+	System::Windows::Forms::OpenFileDialog^ ofd = gcnew System::Windows::Forms::OpenFileDialog();
+	ofd->Filter = "Puzzle Files|*.pzl";
+	if (ofd->ShowDialog() != System::Windows::Forms::DialogResult::OK)
+	{
+		System::IO::StreamReader^ reader = gcnew System::IO::StreamReader(ofd->FileName);
+		textBoxRows->Text = reader->ReadLine();
+		textBoxColumns->Text = reader->ReadLine();
+		creatingCrossword(Convert::ToInt32(textBoxRows->Text), Convert::ToInt32(textBoxColumns->Text));
+		System::String^ line = reader->ReadLine();
+		int rowIndex = 0;
+		for (int j = 0; j < System::Convert::ToInt32(textBoxRows->Text); j++)
+		{
+			for (int i = 0; i < line->Length; i++)
+			{
+				if (line[i] == 'B')
+				{
+					crosswordTemplate->Rows[rowIndex]->Cells[i]->Style->BackColor = System::Drawing::Color::Black;
+				}
+				else
+				{
+					crosswordTemplate->Rows[rowIndex]->Cells[i]->Style->BackColor = System::Drawing::Color::White;
+				}
+			}
+			rowIndex++;
+		}
+		reader->Close();
+	}
+}
+
+System::Void CrosswordPuzzleMaker::MainMenuForm::openCrossword()
+{
+	System::Windows::Forms::OpenFileDialog^ ofd = gcnew System::Windows::Forms::OpenFileDialog();
+	ofd->Filter = "Puzzle Files|*.pzl";
+	if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+	{
+		System::IO::StreamReader^ reader = gcnew System::IO::StreamReader(ofd->FileName);
+		textBoxRows->Text = reader->ReadLine();
+		textBoxColumns->Text = reader->ReadLine();
+		creatingCrossword(Convert::ToInt32(textBoxRows->Text), Convert::ToInt32(textBoxColumns->Text));
+		System::String^ line = reader->ReadLine();
+		for (int j = 0; j < System::Convert::ToInt32(textBoxRows->Text); j++)
+		{
+			for (int i = 0; i < line->Length; i++)
+			{
+				if (line[i] == 'B')
+				{
+					crosswordTemplate->Rows[j]->Cells[i]->Style->BackColor = System::Drawing::Color::Black;
+				}
+				else
+				{
+					crosswordTemplate->Rows[j]->Cells[i]->Style->BackColor = System::Drawing::Color::White;
+				}
+			}
+		}
+		for (int j = 0; j < System::Convert::ToInt32(textBoxRows->Text); j++)
+		{
+			for (int i = 0; i < line->Length; i++)
+			{
+				if (line[i] != '0')
+				{
+					crosswordTemplate->Rows[j]->Cells[i]->Value = line[i];
+				}
+			}
+		}
+		reader->Close();
+	}
+}
+
 System::Boolean CrosswordPuzzleMaker::MainMenuForm::isExistsInRichTextBox(String^ searchText, ListView^ list)
 {
 	for (int i = 0; i < list->Items->Count; i++)
@@ -581,4 +647,50 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::listViewHorizontally_KeyDown(Sy
 System::Void CrosswordPuzzleMaker::MainMenuForm::listViewQuestions_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 {
 	deleteListViewItem(e);
+}
+
+System::Void CrosswordPuzzleMaker::MainMenuForm::saveCrossword()
+{
+	System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter(textLogin + puzzleType + ".pzl");
+	sw->WriteLine(crosswordTemplate->Rows->Count);
+	sw->WriteLine(crosswordTemplate->Columns->Count);
+
+	for (int i = 0; i < crosswordTemplate->RowCount; i++)
+	{
+		for (int j = 0; j < crosswordTemplate->ColumnCount; j++)
+		{
+			if (crosswordTemplate->Rows[i]->Cells[j]->Style->BackColor == System::Drawing::Color::White)
+			{
+				sw->Write("W");
+			}
+			else
+			{
+				sw->Write("B");
+			}
+		}
+		sw->WriteLine();
+	}
+
+	for (int i = 0; i < crosswordTemplate->RowCount; i++)
+	{
+		for (int j = 0; j < crosswordTemplate->ColumnCount; j++)
+		{
+			System::Object^ value = crosswordTemplate->Rows[i]->Cells[j]->Value;
+			if (crosswordTemplate->Rows[i]->Cells[j]->Value == nullptr)
+			{
+				sw->Write("0");
+			}
+			else
+			{
+				sw->Write(value);
+			}
+		}
+		sw->WriteLine();
+	}
+	sw->Close();
+}
+
+System::Void CrosswordPuzzleMaker::MainMenuForm::openCrosswordToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	openCrossword();
 }
