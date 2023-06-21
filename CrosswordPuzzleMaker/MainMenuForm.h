@@ -65,7 +65,9 @@ namespace CrosswordPuzzleMaker
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::MenuStrip^ menuStripTop;
+	protected:
+
 	private: System::Windows::Forms::ToolStripMenuItem^ fileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ newTemplateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ openToolStripMenuItem;
@@ -93,7 +95,7 @@ namespace CrosswordPuzzleMaker
 			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			   this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			   this->menuStripTop = (gcnew System::Windows::Forms::MenuStrip());
 			   this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->newCrosswordToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->newAbstractPuzzleToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -149,7 +151,7 @@ namespace CrosswordPuzzleMaker
 			   this->groupBoxRight = (gcnew System::Windows::Forms::GroupBox());
 			   this->crosswordTemplate = (gcnew System::Windows::Forms::DataGridView());
 			   this->groupBoxCentre = (gcnew System::Windows::Forms::GroupBox());
-			   this->menuStrip1->SuspendLayout();
+			   this->menuStripTop->SuspendLayout();
 			   this->toolStripBottom->SuspendLayout();
 			   this->toolStripTop->SuspendLayout();
 			   this->groupBoxTop->SuspendLayout();
@@ -159,17 +161,17 @@ namespace CrosswordPuzzleMaker
 			   this->groupBoxCentre->SuspendLayout();
 			   this->SuspendLayout();
 			   // 
-			   // menuStrip1
+			   // menuStripTop
 			   // 
-			   this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			   this->menuStripTop->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				   this->fileToolStripMenuItem,
 					   this->helpToolStripMenuItem
 			   });
-			   this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			   this->menuStrip1->Name = L"menuStrip1";
-			   this->menuStrip1->Size = System::Drawing::Size(1340, 24);
-			   this->menuStrip1->TabIndex = 0;
-			   this->menuStrip1->Text = L"menuStrip1";
+			   this->menuStripTop->Location = System::Drawing::Point(0, 0);
+			   this->menuStripTop->Name = L"menuStripTop";
+			   this->menuStripTop->Size = System::Drawing::Size(1340, 24);
+			   this->menuStripTop->TabIndex = 0;
+			   this->menuStripTop->Text = L"Menu";
 			   // 
 			   // fileToolStripMenuItem
 			   // 
@@ -756,12 +758,12 @@ namespace CrosswordPuzzleMaker
 			   this->Controls->Add(this->groupBoxTop);
 			   this->Controls->Add(this->toolStripTop);
 			   this->Controls->Add(this->toolStripBottom);
-			   this->Controls->Add(this->menuStrip1);
+			   this->Controls->Add(this->menuStripTop);
 			   this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
 			   this->ForeColor = System::Drawing::SystemColors::ControlText;
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			   this->MainMenuStrip = this->menuStrip1;
+			   this->MainMenuStrip = this->menuStripTop;
 			   this->Name = L"MainMenuForm";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			   this->Text = L"Crossword Puzzle Maker";
@@ -769,8 +771,8 @@ namespace CrosswordPuzzleMaker
 			   this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainMenuForm::MainMenuForm_FormClosed);
 			   this->Load += gcnew System::EventHandler(this, &MainMenuForm::MainMenuForm_Load);
 			   this->SizeChanged += gcnew System::EventHandler(this, &MainMenuForm::MainMenuForm_SizeChanged);
-			   this->menuStrip1->ResumeLayout(false);
-			   this->menuStrip1->PerformLayout();
+			   this->menuStripTop->ResumeLayout(false);
+			   this->menuStripTop->PerformLayout();
 			   this->toolStripBottom->ResumeLayout(false);
 			   this->toolStripBottom->PerformLayout();
 			   this->toolStripTop->ResumeLayout(false);
