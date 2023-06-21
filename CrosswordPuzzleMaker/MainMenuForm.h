@@ -1,5 +1,5 @@
 #include "SettingsForm.h"
-#include "AboutProgrammForm.h"
+#include "AboutProgramForm.h"
 #include "CrosswordAlgorithm.h"
 
 #pragma once
@@ -66,8 +66,6 @@ namespace CrosswordPuzzleMaker
 			}
 		}
 	private: System::Windows::Forms::MenuStrip^ menuStripTop;
-	protected:
-
 	private: System::Windows::Forms::ToolStripMenuItem^ fileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ newTemplateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ openToolStripMenuItem;
@@ -306,14 +304,14 @@ namespace CrosswordPuzzleMaker
 			   // aboutProgrammToolStripMenuItem
 			   // 
 			   this->aboutProgrammToolStripMenuItem->Name = L"aboutProgrammToolStripMenuItem";
-			   this->aboutProgrammToolStripMenuItem->Size = System::Drawing::Size(167, 22);
-			   this->aboutProgrammToolStripMenuItem->Text = L"About programm";
+			   this->aboutProgrammToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->aboutProgrammToolStripMenuItem->Text = L"About program";
 			   this->aboutProgrammToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainMenuForm::aboutProgrammToolStripMenuItem_Click);
 			   // 
 			   // howToUseItToolStripMenuItem
 			   // 
 			   this->howToUseItToolStripMenuItem->Name = L"howToUseItToolStripMenuItem";
-			   this->howToUseItToolStripMenuItem->Size = System::Drawing::Size(167, 22);
+			   this->howToUseItToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			   this->howToUseItToolStripMenuItem->Text = L"How to use it";
 			   this->howToUseItToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainMenuForm::howToUseItToolStripMenuItem_Click);
 			   // 

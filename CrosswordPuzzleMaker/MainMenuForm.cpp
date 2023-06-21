@@ -49,7 +49,7 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::aboutProgrammToolStripMenuItem_
 	System::Object^ sender, System::EventArgs^ e)
 {
 	// Creating About programm form
-	AboutProgrammForm^ aboutForm = gcnew AboutProgrammForm();
+	AboutProgramForm^ aboutForm = gcnew AboutProgramForm();
 	aboutForm->ShowDialog();
 }
 
@@ -121,6 +121,10 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::toolTopNewCrossword_Click(
 	puzzleType = "_Crossword";
 	createNewField();
 	toolTopGenerateCrossword->Enabled = true;
+	listViewQuestions->Items->Clear();
+	listViewHorizontally->Items->Clear();
+	listViewVertically->Items->Clear();
+	listViewNotUsed->Items->Clear();
 }
 
 System::Void CrosswordPuzzleMaker::MainMenuForm::newAbstractPuzzleToolStripMenuItem_Click(
@@ -130,6 +134,10 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::newAbstractPuzzleToolStripMenuI
 	puzzleType = "_Abstract";
 	createNewField();
 	toolTopGenerateCrossword->Enabled = false;
+	listViewQuestions->Items->Clear();
+	listViewHorizontally->Items->Clear();
+	listViewVertically->Items->Clear();
+	listViewNotUsed->Items->Clear();
 }
 
 System::Void CrosswordPuzzleMaker::MainMenuForm::newCrosswordToolStripMenuItem_Click(
@@ -139,6 +147,10 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::newCrosswordToolStripMenuItem_C
 	puzzleType = "_Crossword";
 	createNewField();
 	toolTopGenerateCrossword->Enabled = true;
+	listViewQuestions->Items->Clear();
+	listViewHorizontally->Items->Clear();
+	listViewVertically->Items->Clear();
+	listViewNotUsed->Items->Clear();
 }
 
 System::Void CrosswordPuzzleMaker::MainMenuForm::newTemplateToolStripMenuItem_Click(
@@ -148,6 +160,10 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::newTemplateToolStripMenuItem_Cl
 	puzzleType = "_Template";
 	createNewField();
 	toolTopGenerateCrossword->Enabled = false;
+	listViewQuestions->Items->Clear();
+	listViewHorizontally->Items->Clear();
+	listViewVertically->Items->Clear();
+	listViewNotUsed->Items->Clear();
 }
 
 System::Void CrosswordPuzzleMaker::MainMenuForm::crosswordTemplate_EditingControlShowing(
@@ -157,7 +173,6 @@ System::Void CrosswordPuzzleMaker::MainMenuForm::crosswordTemplate_EditingContro
 		(e->Control);
 	if (tb != nullptr)
 	{
-		tb->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
 		tb->MaxLength = 1;
 		tb->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(
 			this, &MainMenuForm::crosswordTemplateTextBox_KeyPress);

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AboutProgrammForm.cpp">
+    <ClCompile Include="AboutProgramForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SettingsForm.cpp">
@@ -35,7 +35,7 @@
     <ClInclude Include="SettingsForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AboutProgrammForm.h">
+    <ClInclude Include="AboutProgramForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CrosswordAlgorithm.h">

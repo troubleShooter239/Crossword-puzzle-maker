@@ -127,13 +127,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AboutProgrammForm.cpp" />
+    <ClCompile Include="AboutProgramForm.cpp" />
     <ClCompile Include="CrosswordAlgorithm.cpp" />
     <ClCompile Include="MainMenuForm.cpp" />
     <ClCompile Include="SettingsForm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutProgrammForm.h">
+    <ClInclude Include="AboutProgramForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="CrosswordAlgorithm.h" />
@@ -145,8 +145,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AboutProgrammForm.resx">
-      <DependentUpon>AboutProgrammForm.h</DependentUpon>
+    <EmbeddedResource Include="AboutProgramForm.resx">
+      <DependentUpon>AboutProgramForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenuForm.resx">
       <DependentUpon>MainMenuForm.h</DependentUpon>
