@@ -122,4 +122,4 @@ CrosswordAlgorithm::WordPlacement::WordPlacement(
     startX = x;
     startY = y;
     direction = dir;
-}
+} // ^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^
