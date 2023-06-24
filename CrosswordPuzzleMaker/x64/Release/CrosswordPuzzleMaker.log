@@ -1,5 +1,3 @@
-﻿  AboutProgramForm.cpp
-  MainMenuForm.cpp
-  Создание кода...
-  AboutProgramForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+﻿  CrosswordAlgorithm.cpp
+  AboutProgramForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   CrosswordPuzzleMaker.vcxproj -> C:\Users\HP\Documents\GitHub\Crossword-puzzle-maker\x64\Release\CrosswordPuzzleMaker.exe
