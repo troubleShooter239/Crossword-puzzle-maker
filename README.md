@@ -14,7 +14,7 @@ The Crossword Puzzle Maker is a user-friendly desktop application that allows yo
   
 ## Installation
 
-1. Dowload release version and open it.
+Dowload release version and open it.
 
 ## Usage
 
@@ -25,7 +25,7 @@ The Crossword Puzzle Maker is a user-friendly desktop application that allows yo
 
 ## Support and Feedback
 
-If you encounter any issues or have feedback to share, please [open an issue](https://github.com/troubleShooter239/Crossword-puzzle-maker/issues) on our GitHub repository.
+If you encounter any issues or have feedback to share, please [open an issue](https://github.com/troubleShooter239/Crossword-puzzle-maker/issues) on my GitHub repository.
 
 ## Contributing
 
